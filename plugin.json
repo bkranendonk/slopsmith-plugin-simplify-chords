@@ -1,0 +1,7 @@
+{
+    "id": "simplify_chords",
+    "name": "Simplify Chords",
+    "version": "1.0.0",
+    "script": "screen.js",
+    "settings": true
+}

@@ -1,0 +1,59 @@
+<p class="text-xs text-gray-400 leading-relaxed">
+    The Ultimate Guitar <em>Simplify</em> button.<br><br>
+    Shows beginner-friendly chord names on the note highway by stripping modifiers from complex chords<br>
+</p>
+
+<div class="space-y-3 mt-1">
+
+    <label class="flex items-start gap-3 cursor-pointer select-none">
+        <input type="checkbox" id="sc-opt-extensions"
+               class="mt-0.5 rounded border-gray-600 bg-dark-700 text-accent focus:ring-accent/40"
+               onchange="window._simplifyChords && window._simplifyChords.setOpt('extensions', this.checked)">
+        <div>
+            <span class="text-sm text-gray-300">Disable 7ths &amp; extensions</span>
+            <span class="block text-xs text-gray-500 mt-0.5">
+                Strips numeric suffixes: Am7&nbsp;→&nbsp;Am &nbsp;·&nbsp; Cadd9&nbsp;→&nbsp;C &nbsp;·&nbsp; Gmaj7&nbsp;→&nbsp;G &nbsp;·&nbsp; F#m7&nbsp;→&nbsp;F#m
+            </span>
+        </div>
+    </label>
+
+    <label class="flex items-start gap-3 cursor-pointer select-none">
+        <input type="checkbox" id="sc-opt-sus"
+               class="mt-0.5 rounded border-gray-600 bg-dark-700 text-accent focus:ring-accent/40"
+               onchange="window._simplifyChords && window._simplifyChords.setOpt('sus', this.checked)">
+        <div>
+            <span class="text-sm text-gray-300">Disable Suspended chords</span>
+            <span class="block text-xs text-gray-500 mt-0.5">
+                Strips suspended qualifiers: Dsus4&nbsp;→&nbsp;D &nbsp;·&nbsp; Asus2&nbsp;→&nbsp;A
+            </span>
+        </div>
+    </label>
+
+    <label class="flex items-start gap-3 cursor-pointer select-none">
+        <input type="checkbox" id="sc-opt-dimAug"
+               class="mt-0.5 rounded border-gray-600 bg-dark-700 text-accent focus:ring-accent/40"
+               onchange="window._simplifyChords && window._simplifyChords.setOpt('dimAug', this.checked)">
+        <div>
+            <span class="text-sm text-gray-300">Disable Diminished &amp; augmented</span>
+            <span class="block text-xs text-gray-500 mt-0.5">
+                Strips dim/aug qualifiers: Adim&nbsp;→&nbsp;A &nbsp;·&nbsp; Gaug&nbsp;→&nbsp;G
+            </span>
+        </div>
+    </label>
+
+</div>
+
+<script>
+(function () {
+    var DEFAULTS = { extensions: true, sus: true, dimAug: false };
+    var opts = Object.assign({}, DEFAULTS);
+    try {
+        var stored = localStorage.getItem('simplify_chords_opts');
+        if (stored) opts = Object.assign({}, DEFAULTS, JSON.parse(stored));
+    } catch (_) {}
+    var el;
+    el = document.getElementById('sc-opt-extensions'); if (el) el.checked = !!opts.extensions;
+    el = document.getElementById('sc-opt-sus');        if (el) el.checked = !!opts.sus;
+    el = document.getElementById('sc-opt-dimAug');     if (el) el.checked = !!opts.dimAug;
+})();
+</script>
